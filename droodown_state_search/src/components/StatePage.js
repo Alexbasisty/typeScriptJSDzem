@@ -13,10 +13,14 @@ const StatePage = ({
         state_flag_url,
         state_seal_url,
     },
+    onBack
 }) => {
     return (
         <div className="StatePage content">
-            <button className="button">
+            <button
+                className="button"
+                onClick={onBack}
+                >
                 Wróć do wyszukiwania
             </button>
             <h1 className="title is-1">{state}</h1>

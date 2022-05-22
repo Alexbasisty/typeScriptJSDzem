@@ -58,11 +58,17 @@ const App = () => {
 
 
       return (
-        <StatePage state={pickedState.item} />
+        <div className='App'>
+          <StatePage 
+              state={pickedState.item} 
+              onBack={() => setPicked(null)}
+          />
+        </div>
       )
     }
 
     return (
+      <div className='App'>
         <div className="dropdown is-active">
           <div className="dropdown-trigger">
             <input
@@ -74,24 +80,29 @@ const App = () => {
                 onKeyUp={(event) => onSelect(event)}
                 />
           </div>
-          <div className="dropdown-menu" id="dropdown-menu" role="menu">
-            <div className="dropdown-content">
-              {resultList.map(({ item: {state, code} }, index) => {
-                return (
-                  <a href="#" 
-                    key={code} 
-                    className={classnames("dropdown-item", {
-                      'is-active': selected === index
-                    })}
-                    onMouseEnter={() => setSelected(index)}
-                    >
-                    {state}
-                  </a>
-                )
-              })}
-            </div>
-          </div>
+          {
+            resultList.length > 0 && (
+              <div className="dropdown-menu" id="dropdown-menu" role="menu">
+                <div className="dropdown-content">
+                  {resultList.map(({ item: {state, code} }, index) => {
+                    return (
+                      <a href="#" 
+                        key={code} 
+                        className={classnames("dropdown-item", {
+                          'is-active': selected === index
+                        })}
+                        onMouseEnter={() => setSelected(index)}
+                        onClick={() => setSelected(index)}
+                        >
+                        {state}
+                      </a>
+                    )
+                  })}
+                </div>
+              </div>
+          )}
         </div>
+      </div>
     )
 };
 
